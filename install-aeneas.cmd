@@ -24,10 +24,12 @@ if "%errorlevel%" GTR "0" (
   )
   @echo.
   @echo Checking for Python 2.7
+  
+:: RM I changed this to install the package you specified.
 where python /q
 if "%errorlevel%" GTR "0" (
   @echo installing python
-  choco install python2
+  choco install python2-x86_32
   @echo.
   ) else (
   @echo Python is already installed
@@ -41,8 +43,11 @@ if "%errorlevel%" GTR "0" (
   echo download and install espeak
   choco install espeak -s "%cd%" -f
 )
-
-
+where python /q
+if "%errorlevel%" == "0" (
+  echo Installing Microsoft Visual C++ Compiler for Python 2.7
+  choco install vcpluspluspython27 -s "%cd%" -f
+)
 where /Q pip.exe 
 if "%errorlevel%" == "0" (
   echo Pip in path
@@ -59,7 +64,7 @@ if "%errorlevel%" == "0" (
   pip install scikits.audiolab-0.11.0-cp27-none-win_amd64.whl
 )
 where python /q
-if "%errorlevel%" GTR "0" (
+if "%errorlevel%" == "0" (
   echo running setup
   python setup.py build_ext --inplace
   echo running checks
