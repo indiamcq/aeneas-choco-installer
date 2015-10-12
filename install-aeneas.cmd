@@ -2,6 +2,7 @@
 :: https://github.com/readbeyond/aeneas
 @echo off
 call :check_Permissions
+if "%1" == "setupncheck" call :setupncheck
 
 echo this installer uses Chocolatey package manager for Windows
 echo first check if it is installed
@@ -63,6 +64,14 @@ if "%errorlevel%" == "0" (
   pip install numpy-1.9.2 + mkl-cp27-none-win_amd64.whl
   pip install scikits.audiolab-0.11.0-cp27-none-win_amd64.whl
 )
+goto :eof
+
+:setupncheck
+echo this chek assumes aeneas is a sibling folder to the starting folder
+echo if not press CTRL Break
+pause
+cd ..
+cd aeneas
 where python /q
 if "%errorlevel%" == "0" (
   echo running setup
