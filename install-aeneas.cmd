@@ -24,11 +24,21 @@ if "%errorlevel%" GTR "0" (
   @echo ffmpeg is already installed
   )
   @echo.
-  @echo Checking for Python 2.7
-  
-:: RM I changed this to install the package you specified.
-where python /q
+where espeak /q
 if "%errorlevel%" GTR "0" (
+  echo espeak installed
+  ) else (
+  echo download and install espeak
+  choco install espeak -s "%cd%" -f
+)
+
+rem ============================== Python
+rem from https://download.microsoft.com/download/7/9/6/796EF2E4-801B-4FC4-AB28-B59FBF6D907B/VCForPython27.msi
+rem from https://download.microsoft.com/download/7/9/6/796EF2E4-801B-4FC4-AB28-B59FBF6D907B/VCForPython27.msi
+  @echo Checking for Python 2.7  
+
+where python /q
+if "%errorlevel%" == "0" (
   @echo installing python
   choco install python2
   @echo.
@@ -37,48 +47,30 @@ if "%errorlevel%" GTR "0" (
   @echo.
   )
 
-where espeak /q
-if "%errorlevel%" GTR "0" (
-  echo espeak installed
-  ) else (
-  echo download and install espeak
-  choco install espeak -s "%cd%" -f
-)
-where python /q
-if "%errorlevel%" == "0" (
+
+if exist "C:\Users\mcquayi\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\vcvarsall.bat" (
+  echo Microsoft Visual C++ Compiler for Python 2.7 already installed
+) else (
   echo Installing Microsoft Visual C++ Compiler for Python 2.7
   choco install vcpluspluspython27 -s "%cd%" -f
 )
-where /Q pip.exe 
-if "%errorlevel%" == "0" (
-  echo Pip in path
-  echo starting pip installs
-  call pip install BeautifulSoup
-  call pip install lxml
-  pip install numpy-1.9.2 + mkl-cp27-none-win_amd64.whl
-  pip install scikits.audiolab-0.11.0-cp27-none-win_amd64.whl
+@echo.
+
+set pip=C:\tools\python2\Scripts\pip.exe
+if exist "%pip%"  (
+  echo Pip in found
+  echo starting pip Python package installs
+  %pip% install BeautifulSoup
+  %pip% install lxml
+  %pip% numpy-1.9.3+mkl-cp27-none-win_amd64.whl
+  %pip% install scikits.audiolab-0.11.0-cp27-none-win_amd64.whl
+
 ) else (
-  echo pip not found in path
-  echo add pip manually to path
+  echo Pip not found at %pip%
 )
 
-goto :eof
 
-:setupncheck
-echo this chek assumes aeneas is a sibling folder to the starting folder
-echo if not press CTRL Break
-pause
-cd ..
-cd aeneas
-where python /q
-if "%errorlevel%" == "0" (
-  echo running setup
-  python setup.py build_ext --inplace
-  echo running checks
-  python check_dependencies.py
-)
 goto :eof
-
 
 
 :check_Permissions
