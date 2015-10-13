@@ -2,6 +2,7 @@
 :: https://github.com/readbeyond/aeneas
 @echo off
 call :check_Permissions
+  @echo.
 
 echo This installer method uses Chocolatey package manager for Windows
 call where /Q choco.exe
@@ -14,41 +15,41 @@ if "%errorlevel%" == "0" (
   )
   @echo.
 rem ============================== ffmpeg
-where /Q ffmpeg
+
+call where /Q ffmpeg.exe
 if "%errorlevel%" == "0" (
   @echo ffmpeg is already installed
-  ) else (
+) else (
   @echo installing ffmpeg
   choco install ffmpeg
-  )
+)
 @echo.
 rem ============================== eSpeak
-where espeak /q
+call where /Q espeak.exe
 if "%errorlevel%" == "0" (
-  echo eSpeak already installed
-  ) else (
-  echo download and install eSpeak
+  @echo eSpeak already installed
+) else (
+  @echo download and install eSpeak
   choco install espeak -s "%cd%" -f
 )
 @echo.
 
 rem ============================== Python
 rem from https://download.microsoft.com/download/7/9/6/796EF2E4-801B-4FC4-AB28-B59FBF6D907B/VCForPython27.msi
-rem from https://download.microsoft.com/download/7/9/6/796EF2E4-801B-4FC4-AB28-B59FBF6D907B/VCForPython27.msi
 @echo Checking for Python 2.7  
-where python /q
+call where /Q python.exe
 if "%errorlevel%" == "0" (
   @echo   Python is already installed. 
   @echo   Check that next line reports "Python 2.7.xx"
   python --version
   @echo.
   ) else (
-  @echo installing python
-  choco install python2
+  @echo   installing python
+  choco install python2-7 -s "%cd%" -f
   )
 
 rem ============================== Visual C++ for Python
-if exist "C:\Users\mcquayi\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\vcvarsall.bat" (
+if exist "C:\%userprofile%\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\vcvarsall.bat" (
   echo Microsoft Visual C++ Compiler for Python 2.7 already installed
 ) else (
   echo Installing Microsoft Visual C++ Compiler for Python 2.7
@@ -59,7 +60,7 @@ rem ============================== Python packages
 set pip=C:\tools\python2\Scripts\pip.exe
 if exist "%pip%"  (
   echo Checking if required Python packages are installed
-  if not exist "C:\tools\python2\Lib\site-packages\BeautifulSoup*dist-info" %pip% install BeautifulSoup
+  if not exist "C:\tools\python2\Lib\site-packages\BeautifulSoup*" %pip% install BeautifulSoup
   if exist "C:\tools\python2\Lib\site-packages\BeautifulSoup*dist-info" echo   BeautifulSoup installed
   if not exist "C:\tools\python2\Lib\site-packages\lxml" %pip% install lxml
   if exist "C:\tools\python2\Lib\site-packages\lxml" echo   lxml installed
@@ -90,4 +91,32 @@ goto :eof
         pause >nul
         exit /b
     )
+goto :eof
+
+:checkpath
+where %~1 > temp.txt
+call :getline 1 temp.txt
+set apppath="%getline%"
+echo Testing: %apppath%
+goto :eof
+
+:getline
+:: Description: Get a specific line from a file
+:: Class: command - internal
+:: Required parameters:
+:: linetoget
+:: file
+if defined echogetline echo on
+set /A count=%~1-1
+if "%count%" == "0" (
+    for /f "delims=" %%i in (%~2) do (
+        set getline=%%i
+        goto :eof
+    )
+) else (
+    for /f "skip=%count% delims=" %%i in (%~2) do (
+        set getline=%%i
+        goto :eof
+    )
+)
 goto :eof
