@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <!-- Read this before publishing packages to chocolatey.org: https://github.com/chocolatey/chocolatey/wiki/CreatePackages -->
+    <id>vcpluspluspython27</id>
+    <title>Microsoft Visual C++ Compiler for Python 2.7 (Install)</title>
+    <version>0.1.1</version>
+    <authors>Microsoft</authors>
+    <owners>India Mcq</owners>
+    <summary>This package contains the compiler and set of system headers necessary for producing binary wheels for Python 2.7 packages.</summary>
+    <description>Version: 9.0.0.30729
+File Name: VCForPython27.msi
+Date Published: 9/29/2014
+File Size: 83.8 MB
+This package contains the compiler and set of system headers necessary for producing binary wheels for Python packages. A binary wheel of a Python package can then be installed on any Windows system without requiring access to a C compiler.
+
+The typical error message you will receive if you need this compiler package is Unable to find vcvarsall.bat
+
+This message appears because the Python package being installed contains the source code for a native extension module (.pyd), but does not have a pre-built copy of the module. The Python packages highlighted at pythonwheels.com have already been updated by their developers to include pre-built binaries, but many are still only available as source code.
+
+This compiler package is entirely unsupported and represents a snapshot of the last version that is fully compatible with Python 2.7. For the latest security and bug fixes, please use the latest version of Microsoft Visual Studio for any development work that does not directly interface with Python 2.7.
+
+
+**Please Note**: This is an automatically updated package. If you find it is 
+out of date by more than a day or two, please contact the maintainer(s) and
+let them know the package is no longer updating correctly.
+
+    </description>
+    <projectUrl>http://www.microsoft.com/en-us/download/details.aspx?id=44266</projectUrl>
+    <tags>vcpluspluspython27 admin</tags>
+    <copyright>Microsoft</copyright>
+    <licenseUrl>http://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--<iconUrl>http://cdn.rawgit.com/__REPLACE_YOUR_REPO__/master/icons/vcpluspluspython27.png</iconUrl>-->
+    <!--<dependencies>
+      <dependency id="" version="__VERSION__" />
+      <dependency id="" />
+    </dependencies>-->
+    <releaseNotes>automated installer</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
