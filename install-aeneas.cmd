@@ -2,7 +2,6 @@
 :: https://github.com/readbeyond/aeneas
 @echo off
 call :check_Permissions
-if "%1" == "setupncheck" call :setupncheck
 
 echo This installer method uses Chocolatey package manager for Windows
 call where /Q choco.exe
@@ -14,7 +13,7 @@ if "%errorlevel%" == "0" (
   set errorlevel=0
   )
   @echo.
-
+rem ============================== ffmpeg
 where /Q ffmpeg
 if "%errorlevel%" == "0" (
   @echo ffmpeg is already installed
@@ -22,7 +21,8 @@ if "%errorlevel%" == "0" (
   @echo installing ffmpeg
   choco install ffmpeg
   )
-  @echo.
+@echo.
+rem ============================== eSpeak
 where espeak /q
 if "%errorlevel%" == "0" (
   echo eSpeak already installed
@@ -30,7 +30,7 @@ if "%errorlevel%" == "0" (
   echo download and install eSpeak
   choco install espeak -s "%cd%" -f
 )
-  @echo.
+@echo.
 
 rem ============================== Python
 rem from https://download.microsoft.com/download/7/9/6/796EF2E4-801B-4FC4-AB28-B59FBF6D907B/VCForPython27.msi
@@ -47,7 +47,7 @@ if "%errorlevel%" == "0" (
   choco install python2
   )
 
-
+rem ============================== Visual C++ for Python
 if exist "C:\Users\mcquayi\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\vcvarsall.bat" (
   echo Microsoft Visual C++ Compiler for Python 2.7 already installed
 ) else (
@@ -55,7 +55,7 @@ if exist "C:\Users\mcquayi\AppData\Local\Programs\Common\Microsoft\Visual C++ fo
   choco install vcpluspluspython27 -s "%cd%" -f
 )
 @echo.
-
+rem ============================== Python packages
 set pip=C:\tools\python2\Scripts\pip.exe
 if exist "%pip%"  (
   echo Checking if required Python packages are installed
