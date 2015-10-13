@@ -30,7 +30,7 @@ if "%errorlevel%" GTR "0" (
 where python /q
 if "%errorlevel%" GTR "0" (
   @echo installing python
-  choco install python2-x86_32
+  choco install python2
   @echo.
   ) else (
   @echo Python is already installed
@@ -52,18 +52,16 @@ if "%errorlevel%" == "0" (
 where /Q pip.exe 
 if "%errorlevel%" == "0" (
   echo Pip in path
-) else (
-  path "%path%;C:\tools\python2\Scripts"
-  set path=%path:"=%
-)
-where /Q pip.exe 
-if "%errorlevel%" == "0" (
   echo starting pip installs
   call pip install BeautifulSoup
   call pip install lxml
   pip install numpy-1.9.2 + mkl-cp27-none-win_amd64.whl
   pip install scikits.audiolab-0.11.0-cp27-none-win_amd64.whl
+) else (
+  echo pip not found in path
+  echo add pip manually to path
 )
+
 goto :eof
 
 :setupncheck
