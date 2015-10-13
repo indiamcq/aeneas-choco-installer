@@ -7,44 +7,44 @@ if "%1" == "setupncheck" call :setupncheck
 echo this installer uses Chocolatey package manager for Windows
 echo first check if it is installed
 call where /Q choco.exe
-if "%errorlevel%" GTR "0" (
+if "%errorlevel%" == "0" (
+  @echo Chocolatey is already installed
+  ) else (
   @echo installing Chocolatey
   @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && PATH "%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
   set errorlevel=0
-  ) else (
-  @echo Chocolatey is already installed
   )
   @echo.
 
 where /Q ffmpeg
-if "%errorlevel%" GTR "0" (
+if "%errorlevel%" == "0" (
+  @echo ffmpeg is already installed
+  ) else (
   @echo installing ffmpeg
   choco install ffmpeg
-  ) else (
-  @echo ffmpeg is already installed
   )
   @echo.
 where espeak /q
-if "%errorlevel%" GTR "0" (
-  echo espeak installed
+if "%errorlevel%" == "0" (
+  echo espeak already installed
   ) else (
   echo download and install espeak
   choco install espeak -s "%cd%" -f
 )
+  @echo.
 
 rem ============================== Python
 rem from https://download.microsoft.com/download/7/9/6/796EF2E4-801B-4FC4-AB28-B59FBF6D907B/VCForPython27.msi
 rem from https://download.microsoft.com/download/7/9/6/796EF2E4-801B-4FC4-AB28-B59FBF6D907B/VCForPython27.msi
-  @echo Checking for Python 2.7  
-
+@echo Checking for Python 2.7  
 where python /q
 if "%errorlevel%" == "0" (
-  @echo installing python
-  choco install python2
+  @echo Python is already installed Check next line reports "Python 2.7.xx"
+  python --version
   @echo.
   ) else (
-  @echo Python is already installed
-  @echo.
+  @echo installing python
+  choco install python2
   )
 
 
@@ -85,5 +85,4 @@ goto :eof
         pause >nul
         exit /b
     )
-
 goto :eof
