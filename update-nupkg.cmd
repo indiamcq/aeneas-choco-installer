@@ -7,7 +7,7 @@ goto :eof
 :pack
 cd %~1
 choco pack
-copy /y *.nupkg ..\..\*.nupkg
+move /y *.nupkg ..\..
 cd ..
 goto :eof
 

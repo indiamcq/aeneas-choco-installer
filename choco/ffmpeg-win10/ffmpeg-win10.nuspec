@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <!-- Read this before publishing packages to chocolatey.org: https://github.com/chocolatey/chocolatey/wiki/CreatePackages -->
+    <id>ffmpeg-win10</id>
+    <title>ffmpeg-win10 (Install)</title>
+    <version>2.7.0</version>
+    <authors>http://ffmpeg.org</authors>
+    <owners>India Mcq</owners>
+    <summary>Installer for ffmpeg</summary>
+    <description>Installer for ffmpeg
+    </description>
+    <projectUrl>http://ffmpeg.org</projectUrl>
+    <tags>ffmpeg-win10 admin</tags>
+    <copyright>GNU Lesser General Public License (LGPL) version 2.1</copyright>
+    <licenseUrl>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--<iconUrl>http://cdn.rawgit.com/__REPLACE_YOUR_REPO__/master/icons/ffmpeg-win10.png</iconUrl>-->
+    <!--<dependencies>
+      <dependency id="" version="__VERSION__" />
+      <dependency id="" />
+    </dependencies>-->
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

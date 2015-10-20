@@ -5,7 +5,7 @@
     <!-- Read this before publishing packages to chocolatey.org: https://github.com/chocolatey/chocolatey/wiki/CreatePackages -->
     <id>vcpluspluspython27</id>
     <title>Microsoft Visual C++ Compiler for Python 2.7 (Install)</title>
-    <version>0.1.1</version>
+    <version>9.0.0.30729</version>
     <authors>Microsoft</authors>
     <owners>India Mcq</owners>
     <summary>This package contains the compiler and set of system headers necessary for producing binary wheels for Python 2.7 packages.</summary>
