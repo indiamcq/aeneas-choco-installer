@@ -1,24 +1,26 @@
 # aeneas-choco-installer
-Provides a command line installer for Windows via Chocolatey
+Provides a command line installer for Windows via Chocolatey (works for Win 7 & 8.1, flakky for Win 10)
 
 The Aeneas install process is well documented, but takes time. This method provides a simpler way to install.
 
 * Download the Download ZIP file and extract to a folder.
 * Open an Administrator command prompt at the folder that contains the install-aeneas.cmd file.
-* Type in `install-aeneas` and press enter.
+* Type in `raw-install` and press enter. (not found to work on Win 10)
 
 * The installer will check if Chocolatey is installed. https://chocolatey.org/
-* It will install ffmpeg if it is not found in the path. [choco package]
-* It will install espeak if it is not in the path. [tested: local nupkg]
-* It will install Python 2.7 if it is not found in the path. If you have another Python installed you will need to manually remove that from the path. [Untested: local nupkg]
-* It will add Microsoft Visual C++ Compiler for Python 2.7 [tested: local nupkg]
-* Then it will install four Python packages. [2 remote pip packages and 2 local .whl packages]
+* It will install ffmpeg if not already installed. [tested: local choco package]
+* It will install espeak if not already installed. [tested: local choco package]
+* It will install Miniconda Python 2.7 if not already installed. [tested: local choco package]
+* It will add Microsoft Visual C++ Compiler for Python 2.7 [tested: local choco package]
+* Then it will install three Python packages. [2 remote pip packages and 1 remote conda package]
 
 If all goes will you should see no red text.
 
-The installer can be re run as installed components are skipped but not all.
+The installer can be re run as installed components are skipped (except Visual C++ Compiler for Python 2.7).
 
-At the moment you have to approve the installations. This is still an alpha release.
+This is an alpha release. 
+
+It is an unattended install, but you need to be there to see if it works as it goes along. There is no log file.
 
 To complete the set up change folder to your Aeneas folder and run the following tow commands
 
